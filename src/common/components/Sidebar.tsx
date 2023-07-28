@@ -1,8 +1,32 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { CiLogout } from 'react-icons/ci';
+import {
+  IoCalendarOutline,
+  IoCheckboxOutline,
+  IoListOutline,
+} from 'react-icons/io5';
 
 import { SidebarItem } from '.';
+import { MenuItem } from 'AdminTodos/common/interfaces';
+
+const menuItems: MenuItem[] = [
+  {
+    label: 'Dashboard',
+    icon: <IoCalendarOutline size={40} />,
+    href: '/dashboard',
+  },
+  {
+    label: "REST Todo's",
+    icon: <IoCheckboxOutline size={40} />,
+    href: '/dashboard/rest-todos',
+  },
+  {
+    label: 'Server Actions',
+    icon: <IoListOutline size={40} />,
+    href: '/dashboard/server-actions',
+  },
+];
 
 export const Sidebar = () => {
   return (
@@ -34,7 +58,9 @@ export const Sidebar = () => {
         </div>
 
         <ul className='space-y-2 tracking-wide mt-8'>
-          <SidebarItem />
+          {menuItems.map(({ href, label, icon }) => (
+            <SidebarItem key={href} label={label} icon={icon} href={href} />
+          ))}
         </ul>
       </div>
 
